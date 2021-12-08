@@ -9,18 +9,19 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "SynthSound.h"
 #include "SynthVoice.h"
+#include "SynthSound.h"
+#include "Data/MeterData.h"
 
 //==============================================================================
 /**
 */
-class TaroSynthAudioProcessor  : public juce::AudioProcessor
+class TapSynthAudioProcessor  : public juce::AudioProcessor
 {
 public:
     //==============================================================================
-    TaroSynthAudioProcessor();
-    ~TaroSynthAudioProcessor() override;
+    TapSynthAudioProcessor();
+    ~TapSynthAudioProcessor() override;
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -54,13 +55,26 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-
-    juce::AudioProcessorValueTreeState apvts;
     
+    const std::atomic<float>& getRMS() { return meter.getRMS(); }
+    const std::atomic<float>& getPeak() { return meter.getPeak(); }
+    juce::AudioProcessorValueTreeState apvts;
+
 private:
+    static constexpr int numChannelsToProcess { 2 };
     juce::Synthesiser synth;
     
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
+    void setParams();
+    void setVoiceParams();
+    void setFilterParams();
+    void setReverbParams();
+    
+    static constexpr int numVoices { 5 };
+    juce::dsp::Reverb reverb;
+    juce::Reverb::Parameters reverbParams;
+    MeterData meter;
+    
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TaroSynthAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TapSynthAudioProcessor)
 };

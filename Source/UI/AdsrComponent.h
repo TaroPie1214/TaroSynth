@@ -1,43 +1,27 @@
-/*
-  ==============================================================================
-
-    AdsrComponent.h
-    Created: 20 Jul 2021 11:42:10pm
-    Author:  香芋派Taro
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
+#include "CustomComponent.h"
 
 //==============================================================================
 /*
 */
-class AdsrComponent  : public juce::Component
+class AdsrComponent : public CustomComponent
 {
 public:
-    AdsrComponent(juce::AudioProcessorValueTreeState& apvts);
+    AdsrComponent (juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId, juce::Colour colour);
     ~AdsrComponent() override;
 
-    void paint (juce::Graphics&) override;
     void resized() override;
-    void setSliderParams (juce::Slider& slider);
 
 private:
-    juce::Slider attackSlider;
-    juce::Slider decaySlider;
-    juce::Slider sustainSlider;
-    juce::Slider releaseSlider;
+    SliderWithLabel attack;
+    SliderWithLabel decay;
+    SliderWithLabel sustain;
+    SliderWithLabel release;
     
-    using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
-    //增加代码可读性
-    
-    std::unique_ptr<SliderAttachment> attackAttachment;
-    std::unique_ptr<SliderAttachment> decayAttachment;
-    std::unique_ptr<SliderAttachment> sustainAttachment;
-    std::unique_ptr<SliderAttachment> releaseAttachment;
+    static constexpr int sliderWidth = 50;
+    static constexpr int sliderHeight = 260;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AdsrComponent)
 };

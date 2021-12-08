@@ -2,32 +2,65 @@
 
 <JUCERPROJECT id="LtBzY2" name="taroSynth" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
+              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
+              cppLanguageStandard="17">
   <MAINGROUP id="avvZbT" name="taroSynth">
     <GROUP id="{381A1C5D-448A-113E-D058-93C16F5F85ED}" name="Source">
-      <FILE id="DvG9xj" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
-      <FILE id="WtoGHg" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
-      <FILE id="IXLwuq" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
-      <FILE id="dnvtjH" name="PluginProcessor.cpp" compile="1" resource="0"
-            file="Source/PluginProcessor.cpp"/>
-      <FILE id="lMo0HY" name="PluginProcessor.h" compile="0" resource="0"
-            file="Source/PluginProcessor.h"/>
-      <FILE id="BLlHeJ" name="PluginEditor.cpp" compile="1" resource="0"
+      <FILE id="i4SFXS" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
-      <FILE id="xDMdVb" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-      <GROUP id="{BBA482FC-258C-37D0-9D99-ACDD6FBBE270}" name="UI">
-        <FILE id="SeB8PM" name="AdsrComponent.cpp" compile="1" resource="0"
-              file="Source/UI/AdsrComponent.cpp"/>
-        <FILE id="ldS5RN" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
-        <FILE id="tKqWhI" name="OscComponent.cpp" compile="1" resource="0"
-              file="Source/UI/OscComponent.cpp"/>
-        <FILE id="jvo1Q7" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
+      <FILE id="EFNWfJ" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="l2iHhP" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="QCnkFG" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="nEfEV2" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
+      <FILE id="viORsh" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
+      <FILE id="Q0RfIz" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
+      <GROUP id="{C4AEBF67-2314-6DF9-CEC3-8302E5B13EB7}" name="Data">
+        <FILE id="j5fLpQ" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
+        <FILE id="egfJWF" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
+        <FILE id="N9Vi04" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
+        <FILE id="ILdxCE" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
+        <FILE id="lD9oY9" name="MeterData.cpp" compile="1" resource="0" file="Source/Data/MeterData.cpp"/>
+        <FILE id="rDKbJS" name="MeterData.h" compile="0" resource="0" file="Source/Data/MeterData.h"/>
+        <FILE id="XsupMl" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
+        <FILE id="nOAuYg" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
       </GROUP>
-      <GROUP id="{EDE56DA2-FB25-D4E0-4C7D-29438E89A07B}" name="Data">
-        <FILE id="Ofx3vY" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
-        <FILE id="AkuRIl" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
-        <FILE id="v8B6pg" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
-        <FILE id="O1CdXW" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
+      <GROUP id="{842CD42F-F4CA-8401-FA31-BFDA1C697D84}" name="UI">
+        <FILE id="EkNmnn" name="AdsrComponent.cpp" compile="1" resource="0"
+              file="Source/UI/AdsrComponent.cpp"/>
+        <FILE id="oH2sYt" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
+        <FILE id="ow53Y2" name="Assets.cpp" compile="1" resource="0" file="Source/UI/Assets.cpp"/>
+        <FILE id="TzMwMM" name="Assets.h" compile="0" resource="0" file="Source/UI/Assets.h"/>
+        <FILE id="MwhmWV" name="CustomComponent.cpp" compile="1" resource="0"
+              file="Source/UI/CustomComponent.cpp"/>
+        <FILE id="qdF6D5" name="CustomComponent.h" compile="0" resource="0"
+              file="Source/UI/CustomComponent.h"/>
+        <FILE id="DFvba6" name="CustomLookAndFeel.cpp" compile="1" resource="0"
+              file="Source/UI/CustomLookAndFeel.cpp"/>
+        <FILE id="E5HS8P" name="CustomLookAndFeel.h" compile="0" resource="0"
+              file="Source/UI/CustomLookAndFeel.h"/>
+        <FILE id="ENb3lU" name="FilterComponent.cpp" compile="1" resource="0"
+              file="Source/UI/FilterComponent.cpp"/>
+        <FILE id="V8Lilo" name="FilterComponent.h" compile="0" resource="0"
+              file="Source/UI/FilterComponent.h"/>
+        <FILE id="xoTxu9" name="LfoComponent.cpp" compile="1" resource="0"
+              file="Source/UI/LfoComponent.cpp"/>
+        <FILE id="siLPSM" name="LfoComponent.h" compile="0" resource="0" file="Source/UI/LfoComponent.h"/>
+        <FILE id="NN2IRf" name="MeterComponent.cpp" compile="1" resource="0"
+              file="Source/UI/MeterComponent.cpp"/>
+        <FILE id="xWyKz0" name="MeterComponent.h" compile="0" resource="0"
+              file="Source/UI/MeterComponent.h"/>
+        <FILE id="vhcTM4" name="ModernDial.cpp" compile="1" resource="0" file="Source/UI/ModernDial.cpp"/>
+        <FILE id="Mcx3nE" name="ModernDial.h" compile="0" resource="0" file="Source/UI/ModernDial.h"/>
+        <FILE id="qHazWU" name="NameLabel.h" compile="0" resource="0" file="Source/UI/NameLabel.h"/>
+        <FILE id="pWWr6g" name="OscComponent.cpp" compile="1" resource="0"
+              file="Source/UI/OscComponent.cpp"/>
+        <FILE id="ePJ2df" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
+        <FILE id="ZZGf7G" name="ReverbComponent.cpp" compile="1" resource="0"
+              file="Source/UI/ReverbComponent.cpp"/>
+        <FILE id="rcPqU2" name="ReverbComponent.h" compile="0" resource="0"
+              file="Source/UI/ReverbComponent.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>
