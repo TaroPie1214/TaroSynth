@@ -1,50 +1,94 @@
-/*
-  ==============================================================================
-
-    OscData.cpp
-    Created: 27 Jul 2021 11:26:16pm
-    Author:  香芋派Taro
-
-  ==============================================================================
-*/
-
 #include "OscData.h"
-void OscData::prepareToPlay (juce::dsp::ProcessSpec& spec)
+
+void OscData::prepareToPlay (double sampleRate, int samplesPerBlock, int outputChannels)
 {
+    resetAll();
+    
+    juce::dsp::ProcessSpec spec;
+    spec.maximumBlockSize = samplesPerBlock;
+    spec.sampleRate = sampleRate;
+    spec.numChannels = outputChannels;
+    
     prepare (spec);
+    fmOsc.prepare (spec);
+    gain.prepare (spec);    
 }
 
-void OscData::setWaveType (const int choice)
+void OscData::setType (const int oscSelection)
 {
-    switch (choice)
+    switch (oscSelection)
     {
+        // Sine
         case 0:
-            //Sine
-            initialise ([](float x) { return std::sin(x); });
+            initialise ([](float x) { return std::sin (x); });
             break;
             
+        // Saw
         case 1:
-            //Saw Wave
-            initialise ([](float x) { return x / juce::MathConstants<float>::pi; });
+            initialise ([] (float x) { return x / juce::MathConstants<float>::pi; });
             break;
-            
+          
+        // Square
         case 2:
-            //Square Wave
-            initialise ([](float x) { return x < 0.0f ? -1.0f : 1.0f; });
+            initialise ([] (float x) { return x < 0.0f ? -1.0f : 1.0f; });
             break;
             
         default:
+            // You shouldn't be here!
             jassertfalse;
             break;
     }
 }
 
-void OscData::setWaveFrequency (const int midiNoteNumber)
+void OscData::setGain (const float levelInDecibels)
 {
-    setFrequency (juce::MidiMessage::getMidiNoteInHertz (midiNoteNumber));
+    gain.setGainDecibels (levelInDecibels);
 }
 
-void OscData::getNextAudioBlock (juce::dsp::AudioBlock<float>& block)
+void OscData::setOscPitch (const int pitch)
 {
-    process (juce::dsp::ProcessContextReplacing<float> (block));
+    lastPitch = pitch;
+    setFrequency (juce::MidiMessage::getMidiNoteInHertz ((lastMidiNote + lastPitch) + fmModulator));
+
+}
+
+void OscData::setFreq (const int midiNoteNumber)
+{
+    setFrequency (juce::MidiMessage::getMidiNoteInHertz ((midiNoteNumber + lastPitch) + fmModulator));
+    lastMidiNote = midiNoteNumber;
+}
+
+void OscData::setFmOsc (const float freq, const float depth)
+{
+    fmDepth = depth;
+    fmOsc.setFrequency (freq);
+    setFrequency (juce::MidiMessage::getMidiNoteInHertz ((lastMidiNote + lastPitch) + fmModulator));
+}
+
+void OscData::renderNextBlock (juce::dsp::AudioBlock<float>& audioBlock)
+{
+    jassert (audioBlock.getNumSamples() > 0);
+    process (juce::dsp::ProcessContextReplacing<float> (audioBlock));
+    gain.process (juce::dsp::ProcessContextReplacing<float> (audioBlock));
+}
+
+float OscData::processNextSample (float input)
+{
+    fmModulator = fmOsc.processSample (input) * fmDepth;
+    return gain.processSample (processSample (input));
+}
+
+void OscData::setParams (const int oscChoice, const float oscGain, const int oscPitch, const float fmFreq, const float fmDepth)
+{
+    setType (oscChoice);
+    setGain (oscGain);
+    setOscPitch (oscPitch);
+    setFmOsc (fmFreq, fmDepth);
+}
+
+void OscData::resetAll()
+{
+    reset();
+    fmOsc.reset();
+    gain.reset();
 }
